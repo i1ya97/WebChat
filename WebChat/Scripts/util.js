@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $('#chatBody').hide();
+    $('#frame').hide();
     $('#loginBlock').show();
     // Ссылка на автоматически-сгенерированный прокси хаба
     var chat = $.connection.chatHub;
@@ -12,17 +12,16 @@
         // Добавление сообщений на веб-страницу 
         $('#chatroom').append('<li id="mes' + id + '"><div class="name"><span class="">' + htmlEncode(name) + '</span></div><div class="message"><p>' + htmlEncode(message) + '<input type="checkbox" name="a" value="' + id +'"></p><span class="msg-time">'+date+'</span></div></li>');
     };
-
+    
     // Функция, вызываемая при подключении нового пользователя
     chat.client.onConnected = function (id, userName) {
 
         $('#loginBlock').hide();
-        $('#chatBody').show();
+        $('#frame').show();
         // установка в скрытых полях имени и id текущего пользователя
         $('#hdId').val(id);
         $('#username').val(userName);
-        $('#user').append('<div class="name"><span>'+userName+'<span class="availability">В сети</span></div>')
-
+        $('#user').append('<div class="name"><span>' + userName + '<span class="availability">В сети</span></div>');
         }
     chat.client.allUsers = function (token, name, status) {
         AddUser(token,name, status);
